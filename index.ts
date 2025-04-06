@@ -1,4 +1,5 @@
 import type { BunRequest } from 'bun'
+import sexy from './sexy.html'
 
 Bun.serve({
 	port: 3000,
@@ -8,7 +9,7 @@ Bun.serve({
 			console.log(cookies)
 			return new Response('OK')
 		},
-		'/sample.css': async (req: Request) => {
+		'/sample.css': async (req: BunRequest) => {
 			const cookies = req.cookies
 			console.log(cookies)
 			return new Response(await Bun.file('./sample.css').bytes(), {
@@ -17,11 +18,12 @@ Bun.serve({
 				},
 			})
 		},
-		'/nya': req => {
+		'/sexy': sexy,
+		'/log': (req: BunRequest) => {
 			const url = new URL(req.url)
-			const redirect = url.searchParams.get('redirect')
-			if (!redirect) return new Response('Missing redirect')
-			else return Response.redirect(redirect)
+			let p = url.searchParams.get('key')
+			console.log(p)
+			return new Response('Ok')
 		},
 	},
 })
