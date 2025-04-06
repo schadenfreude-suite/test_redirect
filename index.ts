@@ -5,8 +5,8 @@ Bun.serve({
 	port: 3000,
 	routes: {
 		'/': (req: BunRequest) => {
-			const cookies = req.cookies
-			console.log(cookies)
+			const h = req.headers
+			console.log(h)
 			return new Response('OK')
 		},
 		'/sample.css': async (req: BunRequest) => {
