@@ -1,12 +1,16 @@
+import type { BunRequest } from 'bun'
+
 Bun.serve({
 	port: 3000,
 	routes: {
-		'/': (req: Request) => {
-			console.log(req.headers)
+		'/': (req: BunRequest) => {
+			const cookies = req.cookies
+			console.log(cookies)
 			return new Response('OK')
 		},
 		'/sample.css': async (req: Request) => {
-			console.log(req.headers)
+			const cookies = req.cookies
+			console.log(cookies)
 			return new Response(await Bun.file('./sample.css').bytes(), {
 				headers: {
 					'Content-Type': 'text/css',
